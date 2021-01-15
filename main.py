@@ -8,6 +8,7 @@ import http.client
 import configparser
 import time
 import sys
+import os
 import datetime
 
 import pandas as pd
@@ -34,9 +35,13 @@ def get_config():
 
 
 def get_connection():
-    conn = mysql.connector.connect(user='stock_web', password='test123',
-                            host='db', port=3306,
-                            database='stock_db')
+    conn = mysql.connector.connect(
+        user=os.environ.get('DATA_DB_USER', 'stock_web'),
+        password=os.environ.get('DATA_DB_PASSWORD', 'test123'),
+        host=os.environ.get('DATA_DB_HOST', '0.0.0.0'),
+        port=os.environ.get('DATA_DB_PORT', 3306),
+        database=os.environ.get('DATA_DB_DATABASE', 'stock_db')
+    )
     return conn
 
 
