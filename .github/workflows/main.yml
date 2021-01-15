@@ -2,7 +2,7 @@ name: Data CI Image
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
 
 jobs:
   multi:
