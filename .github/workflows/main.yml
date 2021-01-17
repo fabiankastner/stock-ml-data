@@ -49,3 +49,14 @@ jobs:
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+      - 
+        uses: azure/k8s-set-context@v1
+        with:
+          kubeconfig: '${{ secrets.AZURE_CREDENTIALS }}'
+
+      - 
+        uses: azure/k8s-deploy@v1
+        with:
+          manifests: |
+            kubernetes/db-deployment.yaml
